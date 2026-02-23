@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Landing Page";
+}
+
+<div class="container-fluid bg-dark text-white text-center p-5">
+    <h1 class="display-4">Welcome to Our Platform</h1>
+    <p class="lead">We build amazing web solutions.</p>
+    <a asp-controller="User" 
+       asp-action="Index" 
+       class="btn btn-primary btn-lg mt-3">
+        <i class="fa-solid fa-rocket"></i> Get Started
+    </a>
+</div>
+
+<div class="container mt-5">
+    <div class="row text-center">
+
+        <div class="col-md-4">
+            <i class="fa-solid fa-code fa-3x text-primary mb-3"></i>
+            <h4>Clean Code</h4>
+            <p>Well structured and maintainable applications.</p>
+        </div>
+
+        <div class="col-md-4">
+            <i class="fa-solid fa-mobile-screen fa-3x text-success mb-3"></i>
+            <h4>Responsive Design</h4>
+            <p>Works perfectly on all devices.</p>
+        </div>
+
+        <div class="col-md-4">
+            <i class="fa-solid fa-lock fa-3x text-danger mb-3"></i>
+            <h4>Secure System</h4>
+            <p>Security and reliability guaranteed.</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row text-center">
+
+        <div class="col-md-4">
+            <h2>@ViewBag.TotalUsers</h2>
+            <p>Happy Users</p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>@ViewBag.Projects</h2>
+            <p>Projects Completed</p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>@ViewBag.Awards</h2>
+            <p>Awards Won</p>
+        </div>
+
+    </div>
+</div>

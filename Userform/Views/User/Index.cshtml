@@ -1,0 +1,30 @@
+@model UserForm.Models.UserModel
+
+@{
+    ViewData["Title"] = "User Form";
+}
+
+<h2>Login Form</h2>
+
+<form asp-action="Index" method="post">
+
+    <div>
+        
+        <label><i class="fa-solid fa-user"></i>Name:</label>
+        <input asp-for="Name"/>
+
+    </div>
+
+    <div>
+        <label> <i class="fa-solid fa-envelope"></i> Email:</label>
+        <input asp-for="Email" />
+    </div>
+
+    <div>
+        <label><i class="fa-solid fa-calendar"></i>Age:</label>
+        <input asp-for="Age" />
+    </div>
+
+    <button type="submit">Submit</button>
+
+</form>

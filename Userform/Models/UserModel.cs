@@ -4,6 +4,8 @@ namespace UserForm.Models
 {
     public class UserModel
     {
+        public Guid Id { get; set; } 
+        
         [Required]
         public string Name { get; set; }
 

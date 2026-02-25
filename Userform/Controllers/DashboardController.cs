@@ -1,13 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
+using UserForm.Models;
+using UserForm.Controllers;
 
 namespace UserForm.Controllers
 {
     public class DashboardController : Controller
     {
-        public IActionResult Index(string name)
+        public IActionResult Index(Guid id)
         {
-            ViewBag.Name = name;
-            return View();
+            var user = UserController.Users.FirstOrDefault(x => x.Id == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
         }
     }
 }

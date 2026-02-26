@@ -1,70 +1,58 @@
 using Microsoft.AspNetCore.Mvc;
 using UserForm.Models;
+using UserForm.Services;
 
 namespace UserForm.Controllers
 {
     public class UserController : Controller
     {
-        // Temporary in-memory storage
-        public static List<UserModel> Users = new List<UserModel>();
+        private readonly IUserService _userService;
 
-        // =========================
-        // 1️⃣ Show Create Form
-        // =========================
-        [HttpGet]
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        // =========================
-        // 2️⃣ Handle Create Submit
-        // =========================
         [HttpPost]
         public IActionResult Index(UserModel model)
         {
             if (ModelState.IsValid)
             {
-                model.Id = Guid.NewGuid();  // Generate GUID
-                Users.Add(model);           // Save user to list
-
-                return RedirectToAction("Index", "Dashboard", new { id = model.Id });
+                _userService.CreateUser(model);
+                return RedirectToAction("Report");
             }
+
             return View(model);
         }
 
-        // =========================
-        // 3️⃣ Show Edit Form
-        // =========================
-        [HttpGet]
         public IActionResult Edit(Guid id)
         {
-            var user = Users.FirstOrDefault(x => x.Id == id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
+            var user = _userService.GetUserById(id);
             return View(user);
         }
 
-        // =========================
-        // 4️⃣ Handle Edit Submit
-        // =========================
         [HttpPost]
         public IActionResult Edit(UserModel model)
         {
-            var user = Users.FirstOrDefault(x => x.Id == model.Id);
+            _userService.UpdateUser(model);
+            return RedirectToAction("Report");
+        }
 
-            if (user != null)
-            {
-                user.Name = model.Name;
-                user.Email = model.Email;
-                user.Age = model.Age;   // ✅ IMPORTANT (this was missing)
-            }
+        public IActionResult Deactivate(Guid id)
+        {
+            _userService.DeactivateUser(id);
+            return RedirectToAction("Report");
+        }
 
-            return RedirectToAction("Index", "Dashboard", new { id = model.Id });
+        public IActionResult Report()
+        {
+            var users = _userService.GetAllUsers();
+            return View(users);
         }
     }
 }

@@ -1,6 +1,13 @@
-namespace Userform.Services.Interface;
+using UserForm.Models;
 
-public interface IUserService
+namespace UserForm.Services
 {
-    
+    public interface IUserService
+    {
+        void CreateUser(UserModel user);
+        List<UserModel> GetAllUsers();
+        UserModel GetUserById(Guid id);
+        void UpdateUser(UserModel user);
+        void DeactivateUser(Guid id);
+    }
 }

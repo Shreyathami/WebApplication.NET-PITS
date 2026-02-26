@@ -1,0 +1,29 @@
+@model List<UserForm.Models.UserModel>
+    @using UserForm.Enum
+    @using System.Linq
+
+    
+    @foreach (var user in Model)
+    {
+        <p>Name=  @user.Name <br/> Email= @user.Email <br/> Age= @user.Age</p>
+
+        <a asp-action="Edit" asp-route-id="@user.Id">Edit</a>
+
+        @if (user.Status == UserStatus.Active)
+        {
+            <a asp-action="Deactivate" asp-route-id="@user.Id">Deactivate</a>
+        }
+
+        <hr />
+    }
+    
+<hr />
+
+    <h2>Inactive Users</h2>
+
+    @foreach (var user in Model.Where(x => x.Status == UserStatus.Inactive))
+{
+    <p>
+        Name= @user.Name <br/> Email= @user.Email <br/> Age= @user.Age
+        </p>
+}

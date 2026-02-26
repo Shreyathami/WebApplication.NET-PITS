@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using UserForm.Enum;
 
 namespace UserForm.Models
 {
@@ -16,5 +17,7 @@ namespace UserForm.Models
         [Required]
         [Range(1, 120)]
         public int Age { get; set; }
+        
+        public UserStatus Status { get; set; } = UserStatus.Active;
     }
 }
